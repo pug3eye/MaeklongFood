@@ -6,9 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.pug3eye.mvc_template.R;
 import com.pug3eye.mvc_template.adapter.PhotoListAdapter;
+import com.pug3eye.mvc_template.dao.PhotoItemCollectionDao;
+import com.pug3eye.mvc_template.manager.HttpManager;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -43,6 +52,42 @@ public class MainFragment extends Fragment {
         listView = (ListView) rootView.findViewById(R.id.listView);
         listAdapter = new PhotoListAdapter();
         listView.setAdapter(listAdapter);
+
+        // Make a Call
+        Call<PhotoItemCollectionDao> call = HttpManager.getInstance().getService().loadPhotoList();
+        call.enqueue(new Callback<PhotoItemCollectionDao>() {
+            @Override
+            public void onResponse(Call<PhotoItemCollectionDao> call,
+                                   Response<PhotoItemCollectionDao> response) {
+                if (response.isSuccessful()) {
+                    PhotoItemCollectionDao dao = response.body();
+                    Toast.makeText(getActivity(),
+                            dao.getData().get(0).getCaption(),
+                            Toast.LENGTH_SHORT)
+                         .show();
+                } else {
+                    // call don't Success etc. 404
+                    try {
+                        Toast.makeText(getActivity(),
+                                response.errorBody().string(),
+                                Toast.LENGTH_SHORT)
+                                .show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            // when can't call server
+            @Override
+            public void onFailure(Call<PhotoItemCollectionDao> call,
+                                  Throwable t) {
+                Toast.makeText(getActivity(),
+                        t.toString(),
+                        Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
     }
 
     @Override

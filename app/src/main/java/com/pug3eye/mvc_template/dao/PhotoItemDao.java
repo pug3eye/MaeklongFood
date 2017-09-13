@@ -21,7 +21,7 @@ public class PhotoItemDao {
     @SerializedName("tags")             private List<String> tags;
     @SerializedName("created_time")     private Date createdTime;
     @SerializedName("camera")           private String camera;
-    @SerializedName("len")              private String len;
+    @SerializedName("lens")              private String lens;
     @SerializedName("focal_length")     private String focalLength;
     @SerializedName("iso")              private String iso;
     @SerializedName("shutter_speed")    private String shutterSpeed;
@@ -107,12 +107,12 @@ public class PhotoItemDao {
         this.camera = camera;
     }
 
-    public String getLen() {
-        return len;
+    public String getLens() {
+        return lens;
     }
 
-    public void setLen(String len) {
-        this.len = len;
+    public void setLens(String lens) {
+        this.lens = lens;
     }
 
     public String getFocalLength() {
