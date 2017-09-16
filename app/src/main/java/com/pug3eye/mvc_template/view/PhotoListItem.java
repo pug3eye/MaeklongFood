@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.pug3eye.mvc_template.R;
 import com.pug3eye.mvc_template.view.state.BundleSavedState;
 
@@ -119,7 +121,9 @@ public class PhotoListItem extends BaseCustomViewGroup {
     }
 
     public void setIvImg(String url) {
-//        .setText(ivImg);
-        // TODO: will Load Image
+        Glide.with(getContext())
+                .load(url)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(ivImg);
     }
 }
