@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.pug3eye.mvc_template.R;
 import com.pug3eye.mvc_template.view.state.BundleSavedState;
@@ -15,6 +17,9 @@ import com.pug3eye.mvc_template.view.state.BundleSavedState;
  */
 public class PhotoListItem extends BaseCustomViewGroup {
 
+    TextView tvName;
+    TextView tvDescription;
+    ImageView ivImg;
     public PhotoListItem(Context context) {
         super(context);
         initInflate();
@@ -48,7 +53,11 @@ public class PhotoListItem extends BaseCustomViewGroup {
     }
 
     private void initInstances() {
-        // findViewById here
+        // findViewById
+        tvName = (TextView)findViewById(R.id.tvName);
+        tvDescription = (TextView) findViewById(R.id.tvDescription);
+        ivImg = (ImageView) findViewById(R.id.ivImg);
+
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -101,4 +110,16 @@ public class PhotoListItem extends BaseCustomViewGroup {
         setMeasuredDimension(width, height);
     }
 
+    public void setTvName(String name) {
+        tvName.setText(name);
+    }
+
+    public void setTvDescription(String name) {
+        tvDescription.setText(name);
+    }
+
+    public void setIvImg(String url) {
+//        .setText(ivImg);
+        // TODO: will Load Image
+    }
 }

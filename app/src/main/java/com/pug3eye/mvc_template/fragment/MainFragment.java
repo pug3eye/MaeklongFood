@@ -13,6 +13,7 @@ import com.pug3eye.mvc_template.adapter.PhotoListAdapter;
 import com.pug3eye.mvc_template.dao.PhotoItemCollectionDao;
 import com.pug3eye.mvc_template.manager.Contextor;
 import com.pug3eye.mvc_template.manager.HttpManager;
+import com.pug3eye.mvc_template.manager.PhotoListManager;
 
 import java.io.IOException;
 
@@ -62,6 +63,8 @@ public class MainFragment extends Fragment {
                                    Response<PhotoItemCollectionDao> response) {
                 if (response.isSuccessful()) {
                     PhotoItemCollectionDao dao = response.body();
+                    PhotoListManager.getInstance().setDao(dao);
+                    listAdapter.notifyDataSetChanged();
                     Toast.makeText(Contextor.getInstance().getContext(),
                             dao.getData().get(0).getTitle(),
                             Toast.LENGTH_SHORT)

@@ -4,6 +4,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.pug3eye.mvc_template.dao.PhotoItemDao;
+import com.pug3eye.mvc_template.manager.PhotoListManager;
 import com.pug3eye.mvc_template.view.PhotoListItem;
 
 /**
@@ -15,12 +17,16 @@ public class PhotoListAdapter extends BaseAdapter{
     // How many item?
     @Override
     public int getCount() {
-        return 100;
+        if (PhotoListManager.getInstance().getDao() == null)
+            return 0;
+        if (PhotoListManager.getInstance().getDao().getData() == null)
+            return 0;
+        return PhotoListManager.getInstance().getDao().getData().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return PhotoListManager.getInstance().getDao().getData().get(position);
     }
 
     @Override
@@ -48,7 +54,6 @@ public class PhotoListAdapter extends BaseAdapter{
             item = (PhotoListItem) convertView;
         else
             item = new PhotoListItem(parent.getContext());
-        return item;
 //        } else {
 //            TextView item;
 //            if (convertView != null)
@@ -58,5 +63,12 @@ public class PhotoListAdapter extends BaseAdapter{
 //            item.setText("Position: " + position);
 //            return item;
 //        }
+        PhotoItemDao dao = (PhotoItemDao) getItem(position);
+        item.setTvName(dao.getTitle());
+        item.setTvDescription("(" + dao.getSlug() + ").  " + dao.getContent());
+        item.setIvImg(dao.getFeaturedImage());
+
+        return item;
+
     }
 }
