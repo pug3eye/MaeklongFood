@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.pug3eye.mvc_template.R;
 import com.pug3eye.mvc_template.adapter.PhotoListAdapter;
 import com.pug3eye.mvc_template.dao.PhotoItemCollectionDao;
+import com.pug3eye.mvc_template.manager.Contextor;
 import com.pug3eye.mvc_template.manager.HttpManager;
 
 import java.io.IOException;
@@ -61,14 +62,14 @@ public class MainFragment extends Fragment {
                                    Response<PhotoItemCollectionDao> response) {
                 if (response.isSuccessful()) {
                     PhotoItemCollectionDao dao = response.body();
-                    Toast.makeText(getActivity(),
-                            dao.getData().get(0).getCaption(),
+                    Toast.makeText(Contextor.getInstance().getContext(),
+                            dao.getData().get(0).getTitle(),
                             Toast.LENGTH_SHORT)
                          .show();
                 } else {
                     // call don't Success etc. 404
                     try {
-                        Toast.makeText(getActivity(),
+                        Toast.makeText(Contextor.getInstance().getContext(),
                                 response.errorBody().string(),
                                 Toast.LENGTH_SHORT)
                                 .show();
@@ -82,7 +83,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onFailure(Call<PhotoItemCollectionDao> call,
                                   Throwable t) {
-                Toast.makeText(getActivity(),
+                Toast.makeText(Contextor.getInstance().getContext(),
                         t.toString(),
                         Toast.LENGTH_LONG)
                         .show();

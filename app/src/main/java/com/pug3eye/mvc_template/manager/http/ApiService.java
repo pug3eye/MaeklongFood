@@ -1,9 +1,9 @@
 package com.pug3eye.mvc_template.manager.http;
 
-import com.pug3eye.mvc_template.dao.FoodItemCollectionDao;
 import com.pug3eye.mvc_template.dao.PhotoItemCollectionDao;
 
 import retrofit2.Call;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -12,10 +12,7 @@ import retrofit2.http.POST;
 
 public interface ApiService {
 
-    @POST("list")
+    @GET("posts")
     Call<PhotoItemCollectionDao> loadPhotoList();
 
-    // test Food APIs
-    @POST("posts")
-    Call<FoodItemCollectionDao> loadFoodList();
 }

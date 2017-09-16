@@ -10,15 +10,34 @@ import java.util.List;
 
 public class PhotoItemCollectionDao {
 
-    @SerializedName("success")      private boolean success;
+//    @SerializedName("success")      private boolean success;
+//    @SerializedName("data")         private List<PhotoItemDao> data;
+//
+//    public boolean isSuccess() {
+//        return success;
+//    }
+//
+//    public void setSuccess(boolean success) {
+//        this.success = success;
+//    }
+//
+//    public List<PhotoItemDao> getData() {
+//        return data;
+//    }
+//
+//    public void setData(List<PhotoItemDao> data) {
+//        this.data = data;
+//    }
+
+    @SerializedName("status")       private String status;
     @SerializedName("data")         private List<PhotoItemDao> data;
 
-    public boolean isSuccess() {
-        return success;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public List<PhotoItemDao> getData() {
@@ -28,4 +47,5 @@ public class PhotoItemCollectionDao {
     public void setData(List<PhotoItemDao> data) {
         this.data = data;
     }
+
 }

@@ -15,7 +15,7 @@ public class PhotoListAdapter extends BaseAdapter{
     // How many item?
     @Override
     public int getCount() {
-        return 10000;
+        return 100;
     }
 
     @Override

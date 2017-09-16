@@ -29,13 +29,14 @@ public class HttpManager {
         mContext = Contextor.getInstance().getContext();
 
                     // solve : 2017-09-13T11:17:45-04:00 format
-        Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                .create();
+//        Gson gson = new GsonBuilder()
+//                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+//                .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://nuuneoi.com/courses/500px/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .baseUrl("http://10.0.2.2:8080/api/v1/")
+//                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         service = retrofit.create(ApiService.class);
